@@ -1,5 +1,5 @@
 # litejournal
 
-This is a quick and dirty terminal based journaling software written in C for Linux. I'm using this project to get better acquainted with File I/O in C.
+This is a quick and dirty terminal-based journaling software written in C for Linux.
 
-It is VERY early in development and currently has close to zero features.
+This software is extremely early in development and honestly should not be in its current form for anyone wanting something remotely feature complete, safe, or stable.
