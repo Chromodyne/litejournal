@@ -4,8 +4,11 @@
 #include<stdlib.h>
 #include<string.h>
 #include<time.h>
+#include<unistd.h>
+
 //TODO: Dynamically allocate this if necessary.
 #define SUBJECT_LENGTH 100
+#define JOURNAL_FILE "journal.lj"
 
 //This struct is used to temporarily store new entries before they are written to the journal file.
 typedef struct {
@@ -19,6 +22,7 @@ typedef struct {
 //Prototypes
 void new_entry();
 void list_entries();
+void open_journal();
 
 int main(int argc, char **argv) {
 
@@ -35,7 +39,7 @@ int main(int argc, char **argv) {
 
 		printf("Please select an option: \n");
 
-		printf("(n) New Entry, (r) Remove Entry, (l) List Entries, (q) Quit\n");
+		printf("(n) New Entry, (r) Remove Entry, (l) List Entries, (o) Open Journal File, (q) Quit\n");
 
 		//I don't like having to suppress newline characters this way.
 		scanf("%c%*c", &selection);
@@ -51,11 +55,15 @@ int main(int argc, char **argv) {
 
 			case 'l':
 				break;
+			
+			case 'o':
+				open_journal();
+				break;
 
 			case 'q':
 				shouldQuit = true;
 				break;
-				
+
 			default:
 				printf("\nIncorrect selection specified. ");
 
@@ -91,6 +99,7 @@ void new_entry() {
 
 		fputs(asctime(localtime(&new_entry.timestamp)), fp);
 		fputs(new_entry.body, fp);
+		fputs("END", fp);
 		fprintf(fp, "\n");
 			
 	} else {
@@ -106,5 +115,34 @@ void new_entry() {
 
 }
 
+//This function will list the latest entry in the journal.
 void list_entries() {
+
+	FILE *fp;
+
+	fp = fopen("journal.lj", "r");
+
+	if (fp != NULL) {
+
+		//if (fgets(s)
+
+	} else {
+		fprintf(stderr, "File open returned null.\n");
+		exit(EXIT_FAILURE);
+	}
+
+	fclose(fp);
+
+}
+
+//This function will be used to open the journal file in the default text editor.
+void open_journal() {
+
+	//Gets the path for the default editor in the environment.
+	char *default_editor = getenv("EDITOR");
+
+	char *opencommand  = strcat(strcat(default_editor, " "), JOURNAL_FILE);
+	
+	system(opencommand);
+
 }
