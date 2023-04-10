@@ -1,3 +1,13 @@
+/*
+	litejournal Version 0.01a
+
+	Created by: Devin Sinitiere
+
+	This software is licensed under the GNU Public License. 
+
+	This software is provided AS IS with no warranty.
+*/
+
 #include<stdio.h>
 #include<stdbool.h>
 #include<stdint.h>
@@ -14,18 +24,21 @@
 typedef struct {
 
 	char subject[SUBJECT_LENGTH];
+
+	//TODO: The length of the body needs to be dynamically allocated at runtime.
 	char body[255];
 	time_t timestamp;
 
 } Entry;
 
-//Prototypes
+//Function Prototypes
 void new_entry();
 void list_entries();
 void open_journal();
 
 int main(int argc, char **argv) {
 
+	//Controls the main loop of the program.
 	bool shouldQuit = false;
 
 	printf("Welcome to litejournal 0.01!\n\n");
@@ -54,6 +67,7 @@ int main(int argc, char **argv) {
 				break;
 
 			case 'l':
+				list_entries();
 				break;
 			
 			case 'o':
@@ -66,6 +80,7 @@ int main(int argc, char **argv) {
 
 			default:
 				printf("\nIncorrect selection specified. ");
+				break;
 
 		}
 
@@ -93,13 +108,12 @@ void new_entry() {
 
 	fgets(new_entry.body, sizeof(new_entry.body), stdin);
 
-	fp = fopen("journal.lj", "a");
+	fp = fopen(JOURNAL_FILE, "a");
 
 	if (fp != NULL) {
 
 		fputs(asctime(localtime(&new_entry.timestamp)), fp);
 		fputs(new_entry.body, fp);
-		fputs("END", fp);
 		fprintf(fp, "\n");
 			
 	} else {
@@ -120,12 +134,21 @@ void list_entries() {
 
 	FILE *fp;
 
+	char str[70];
+
 	fp = fopen("journal.lj", "r");
 
 	if (fp != NULL) {
 
-		//if (fgets(s)
+		//TODO
+		//READ UNTIL EMPTY LINE OR IDENTIFIER REACHED
+		//OUTPUT TO STDIN
 
+		if (fgets(str, 70, fp) != NULL) {
+			puts(str);
+		}
+
+	
 	} else {
 		fprintf(stderr, "File open returned null.\n");
 		exit(EXIT_FAILURE);
@@ -141,8 +164,14 @@ void open_journal() {
 	//Gets the path for the default editor in the environment.
 	char *default_editor = getenv("EDITOR");
 
+	//Feels dirty doing it this way but works for now.
 	char *opencommand  = strcat(strcat(default_editor, " "), JOURNAL_FILE);
 	
 	system(opencommand);
+
+}
+
+//TODO: This function will be used to check arguments passed in and utilize them.
+void check_args() {
 
 }
