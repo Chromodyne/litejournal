@@ -3,19 +3,22 @@
 #include<stdint.h>
 #include<stdlib.h>
 #include<string.h>
+#include<time.h>
 //TODO: Dynamically allocate this if necessary.
-#define NAME_LENGTH 100
+#define SUBJECT_LENGTH 100
 
 //This struct is used to temporarily store new entries before they are written to the journal file.
 typedef struct {
 
-	char name[NAME_LENGTH];
+	char subject[SUBJECT_LENGTH];
 	char body[255];
+	time_t timestamp;
 
 } Entry;
 
 //Prototypes
-void new_entry(char * entry_name);
+void new_entry();
+void list_entries();
 
 int main(int argc, char **argv) {
 
@@ -40,11 +43,7 @@ int main(int argc, char **argv) {
 		switch (selection) {
 
 			case 'n':
-
-				printf("Please enter an entry name: ");
-				char entry_name[NAME_LENGTH]; 
-				fgets(entry_name, NAME_LENGTH, stdin);
-				new_entry(entry_name);
+				new_entry();
 				break;
 
 			case 'r':
@@ -56,6 +55,7 @@ int main(int argc, char **argv) {
 			case 'q':
 				shouldQuit = true;
 				break;
+				
 			default:
 				printf("\nIncorrect selection specified. ");
 
@@ -67,24 +67,32 @@ int main(int argc, char **argv) {
 
 }
 
-void new_entry(char * entry_name) {
+void new_entry() {
 
+	time_t timestamp = time(NULL);
 	FILE *fp;
 	char ch;
 
 	Entry new_entry;
+
+	new_entry.timestamp = timestamp;
+
+	printf("Please enter a subject: ");					//Currently unused.
+	fgets(new_entry.subject, SUBJECT_LENGTH, stdin);
 
 	printf("Enter your text: \n");
 
 
 	fgets(new_entry.body, sizeof(new_entry.body), stdin);
 
-	fp = fopen("journal.lj", "w");
+	fp = fopen("journal.lj", "a");
 
 	if (fp != NULL) {
 
-		fputs(new_entry.body, fp);	
-	
+		fputs(asctime(localtime(&new_entry.timestamp)), fp);
+		fputs(new_entry.body, fp);
+		fprintf(fp, "\n");
+			
 	} else {
 		
 		fprintf(stderr, "File open returned null.\n");
@@ -99,7 +107,4 @@ void new_entry(char * entry_name) {
 }
 
 void list_entries() {
-
-
-	
 }
