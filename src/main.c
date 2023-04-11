@@ -17,10 +17,19 @@ int main(int argc, char **argv) {
 	//Controls the main loop of the program.
 	bool shouldQuit = false;
 
+	
+
+	printf("%s", argv[1]);
+
+	//If program is opening with a string as an argument it will be written to file.
+	//TODO: This is obviously sloppy and the element number needs to not be hardcoded to accept other arguments in any order.
+	if (argv[1] != NULL) {
+		write_to_file(argv[1]);
+		return 0;
+	}
+
 	printf("Welcome to litejournal 0.01!\n\n");
 	printf("Default journal loaded...\n\n");
-
-	//TODO: Check if a new journal file should be created. If so, create one and load it. Otherwise choose a journal file to load.
 
 	while (!shouldQuit) {
 
