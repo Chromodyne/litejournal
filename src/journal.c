@@ -6,60 +6,61 @@
 
 #define SUBJECT_LENGTH 100
 #define JOURNAL_FILE "journal.lj"
-
+#define MAX_LENGTH 255
 //This struct is used to store input temporarilty before it is written to the journal file.
 typedef struct {
 
 	char subject[SUBJECT_LENGTH];
 
 	//TODO: The length of the body needs to be dynamically allocated at runtime.
-	char body[255];
+	char body[MAX_LENGTH];
 	time_t timestamp;
 
 } Entry;
 
 //Function prototypes
 char * get_time(Entry entry);
+void write_to_file();
 
 //Stores user input into the journal file when invoked.
 void new_entry() {
 
-	time_t timestamp = time(NULL);
+	//time_t timestamp = time(NULL);
 	
-	FILE *fp;
+	//FILE *fp;
 
-	Entry new_entry;
+	//Entry new_entry;
 
-	new_entry.timestamp = timestamp;
+	//new_entry.timestamp = timestamp;
 
 	//printf("Please enter a subject: ");					//Currently unused.
 	//fgets(new_entry.subject, SUBJECT_LENGTH, stdin);
 
-	//TODO: Store timestamp and content on same line so newlines can be used to identify separate entries.
-
 	printf("Enter your text (Max 255 characters.): \n");
 
-	fgets(new_entry.body, sizeof(new_entry.body), stdin);
+	//fgets(new_entry.body, sizeof(new_entry.body), stdin);
 
-	fp = fopen(JOURNAL_FILE, "a");
+	// fp = fopen(JOURNAL_FILE, "a");
 
-	if (fp != NULL) {
+	// if (fp != NULL) {
 
-		fputs(get_time(new_entry), fp);
-		fputs("   ", fp);
-		fputs(new_entry.body, fp);
-		fprintf(fp, "\n");
+	// 	fputs(get_time(new_entry), fp);
+	// 	fputs("   ", fp);
+	// 	fputs(new_entry.body, fp);
+	// 	fprintf(fp, "\n");
 			
-	} else {
+	// } else {
 		
-		fprintf(stderr, "File open returned null.\n");
-		exit(EXIT_FAILURE);
+	// 	fprintf(stderr, "File open returned null.\n");
+	// 	exit(EXIT_FAILURE);
 
-	}
+	// }
 
-	printf("\nNew entry added successully!\n\n");
+	// printf("\nNew entry added successully!\n\n");
 
-	fclose(fp);
+	// fclose(fp);
+
+	write_to_file(NULL);
 
 }
 
@@ -68,7 +69,7 @@ void list_latest() {
 
 	FILE *fp;
 
-	char str[70];
+	char str[MAX_LENGTH];
 
 	fp = fopen("journal.lj", "r");
 
@@ -78,7 +79,8 @@ void list_latest() {
 		//READ UNTIL EMPTY LINE OR IDENTIFIER REACHED
 		//OUTPUT TO STDIN
 
-		if (fgets(str, 70, fp) != NULL) {
+		if (fgets(str, MAX_LENGTH, fp) != NULL) {
+			puts("\n");
 			puts(str);
 		}
 
@@ -108,13 +110,48 @@ void open_journal() {
 //Used to modify the timestamp obtained on new entry.
 char *get_time(Entry entry) {
 
-	//Convert time_t to string.
+	//Convert time_t type to string.
 	char *timeString = asctime(localtime(&entry.timestamp));
 	
 	//Remove newline character (\n) added by asctime()
-	//NOTE: The final element of the char array will be null!
+	//NOTE: The final element of the char array will be null! Fix later dynamically!
 	timeString[strlen(timeString) - 1] = 0;
 
 	return timeString;
+
+}
+
+//Writing to file will be refactored into here so that command line arguments can be used to write entries.
+void write_to_file(char * args) {
+
+	time_t timestamp = time(NULL);
+	FILE *fp;
+	Entry new_entry;
+
+	new_entry.timestamp = timestamp;
+
+	if (args == NULL) {
+		fgets(new_entry.body, sizeof(new_entry.body), stdin);
+	}
+	
+	fp = fopen(JOURNAL_FILE, "a");
+
+	if (fp != NULL) {
+
+		fputs(get_time(new_entry), fp);
+		fputs("   ", fp);
+		fputs(new_entry.body, fp);
+		fprintf(fp, "\n");
+			
+	} else {
+		
+		fprintf(stderr, "File open returned null.\n");
+		exit(EXIT_FAILURE);
+
+	}
+
+	printf("\nNew entry added successully!\n\n");
+
+	fclose(fp);
 
 }
