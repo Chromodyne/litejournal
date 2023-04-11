@@ -9,6 +9,7 @@
 */
 #include<stdio.h>
 #include<stdbool.h>
+#include<ctype.h>
 #include "../include/journal.h"
 
 int main(int argc, char **argv) {
@@ -27,10 +28,11 @@ int main(int argc, char **argv) {
 
 		printf("Please select an option: \n");
 
-		printf("(n) New Entry, (r) Remove Entry, (l) Show last entry, (o) Open Journal File, (s) Statistics, (q) Quit\n");
+		printf("(n) New Entry, (r) Remove Entry, (l) Show latest entry, (o) Open Journal File, (s) Statistics, (q) Quit\n");
 
 		//I don't like having to suppress newline characters this way.
 		scanf("%c%*c", &selection);
+		selection = tolower(selection);
 
 		switch (selection) {
 
@@ -42,7 +44,7 @@ int main(int argc, char **argv) {
 				break;
 
 			case 'l':
-				list_entries();
+				list_latest();
 				break;
 			
 			case 'o':

@@ -4,7 +4,7 @@
 #define JOURNAL_H
 
 void new_entry();
-void list_entries();
+void list_latest();
 void open_journal();
 
 #endif
