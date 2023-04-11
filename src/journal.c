@@ -27,8 +27,6 @@ void new_entry() {
 	time_t timestamp = time(NULL);
 	
 	FILE *fp;
-	char ch;
-	int len;
 
 	Entry new_entry;
 
