@@ -25,40 +25,10 @@ void write_to_file();
 //Stores user input into the journal file when invoked.
 void new_entry() {
 
-	//time_t timestamp = time(NULL);
-	
-	//FILE *fp;
-
-	//Entry new_entry;
-
-	//new_entry.timestamp = timestamp;
-
 	//printf("Please enter a subject: ");					//Currently unused.
 	//fgets(new_entry.subject, SUBJECT_LENGTH, stdin);
 
 	printf("Enter your text (Max 255 characters.): \n");
-
-	//fgets(new_entry.body, sizeof(new_entry.body), stdin);
-
-	// fp = fopen(JOURNAL_FILE, "a");
-
-	// if (fp != NULL) {
-
-	// 	fputs(get_time(new_entry), fp);
-	// 	fputs("   ", fp);
-	// 	fputs(new_entry.body, fp);
-	// 	fprintf(fp, "\n");
-			
-	// } else {
-		
-	// 	fprintf(stderr, "File open returned null.\n");
-	// 	exit(EXIT_FAILURE);
-
-	// }
-
-	// printf("\nNew entry added successully!\n\n");
-
-	// fclose(fp);
 
 	write_to_file(NULL);
 
