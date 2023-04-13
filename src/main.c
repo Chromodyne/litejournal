@@ -13,17 +13,36 @@
 #include<argp.h>
 #include "../include/journal.h"
 
+static int parse_opt(int key, char *arg, struct argp_state *state) {
+	
+	switch (key) {
+
+		//New entry.
+		case 'n': {
+
+			printf("Should write a new entry.\n");
+			break;
+
+		}
+
+	}
+
+	return 0;
+
+}
+
 int main(int argc, char **argv) {
 
-	//Controls the main loop of the program.
-	bool shouldQuit = false;
+	struct argp_option options[] = {
+		{0, 'n', 0, 0, "Create a new entry"},
+		{0}
+	};
 
-	//If program is opening with a string as an argument it will be written to file.
-	//TODO: This is a proof of concept. argp will be used in the future.
-	if (argv[1] != NULL) {
-		write_to_file(argv[1]);
-		return 0;
-	}
+	struct argp argp = { options, parse_opt };
+
+	argp_parse(&argp, argc, argv, 0, 0, 0);
+
+	bool shouldQuit = false;
 
 	printf("Welcome to litejournal 0.01!\n\n");
 	printf("Default journal loaded...\n\n");
