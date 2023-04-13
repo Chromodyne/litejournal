@@ -103,9 +103,7 @@ void write_to_file(char * args) {
 	if (args == NULL) {
 		fgets(new_entry.body, sizeof(new_entry.body), stdin);
 	} else {
-		
 		strcpy(new_entry.body, args);
-
 	}
 	
 	fp = fopen(JOURNAL_FILE, "a");

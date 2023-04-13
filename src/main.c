@@ -10,6 +10,7 @@
 #include<stdio.h>
 #include<stdbool.h>
 #include<ctype.h>
+#include<argp.h>
 #include "../include/journal.h"
 
 int main(int argc, char **argv) {
@@ -18,7 +19,7 @@ int main(int argc, char **argv) {
 	bool shouldQuit = false;
 
 	//If program is opening with a string as an argument it will be written to file.
-	//TODO: This is obviously sloppy and the element number needs to not be hardcoded to accept other arguments in any order.
+	//TODO: This is a proof of concept. argp will be used in the future.
 	if (argv[1] != NULL) {
 		write_to_file(argv[1]);
 		return 0;
