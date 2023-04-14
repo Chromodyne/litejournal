@@ -6,6 +6,7 @@
 
 #define SUBJECT_LENGTH 100
 #define JOURNAL_FILE "journal.lj"
+//Dynamically allocate this later so that the length of entries is not hardcoded.
 #define MAX_LENGTH 255
 
 //This struct is used to store input temporarilty before it is written to the journal file.
@@ -123,5 +124,27 @@ void write_to_file(char * args) {
 	printf("\nNew entry added successully!\n\n");
 
 	fclose(fp);
+
+}
+
+//Deletes the user's journal file.
+void remove_journal() {
+
+	char choice;
+
+	printf("Are you certain you wish to delete your journal file? (This cannot be undone!) (y/n): ");
+
+	//TODO: Make sure the journal file exists first. If so, delete, otherwise, throw an error.
+	if ((choice = getchar()) == 'y') {
+
+		system("rm journal.lj");
+		printf("Journal file removed successfully.");
+
+	} else {
+
+		printf("Journal removal cancelled.");
+		return;
+
+	} 
 
 }

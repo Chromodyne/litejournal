@@ -52,6 +52,14 @@ static int parse_opt(int key, char *arg, struct argp_state *state) {
 
 		}
 
+		case 'r': {
+
+			remove_journal();
+			exit(EXIT_SUCCESS);
+			break;
+
+		}
+
 	}
 
 	return 0;
@@ -64,6 +72,7 @@ int main(int argc, char **argv) {
 		{"list-entries", 'l', "NUMENTRIES", OPTION_ARG_OPTIONAL, "List specified number of entries"},
 		{"new-entry", 'n', "TEXT", OPTION_ARG_OPTIONAL, "Create a new entry"},			//TODO: Takes a string as an argument.
 		{"open-journal", 'o', 0, 0, "Open journal file in default editor"},
+		{"remove-journal", 'r', 0, 0, "Delete journal file"},
 		{0}
 	};
 
