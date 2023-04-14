@@ -4,7 +4,7 @@
 
 # NAME
 
-litejournal - A lightweight, terminal-based journaling software written in C.
+litejournal - A lightweight, terminal-based journaling application for Linux written in C.
 
 # SYNOPSIS
 
@@ -15,10 +15,16 @@ This is a synopsis.
 Create and maintain a personal journal through the command line.
 
 **-h**, **--help**
-: Receive help with common arguments.
+: Receive help with common arguments
 
-**-r**, **--reset**
-: Remove your journal file.
+**-n**, **--new-entry**
+: Create a new journal entry
+
+**-o**, **--open-journal**
+: Open journal file in default editor
+
+**-r**, **--remove-journal**
+: Remove your journal file
 
 # OPTIONS
 

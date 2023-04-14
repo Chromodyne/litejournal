@@ -44,15 +44,10 @@ void list_latest() {
 
 	if (fp != NULL) {
 
-		//TODO
-		//READ UNTIL EMPTY LINE OR IDENTIFIER REACHED
-		//OUTPUT TO STDIN
-
-		if (fgets(str, MAX_LENGTH, fp) != NULL) {
-			puts("\n");
-			puts(str);
+		//TODO: Do not hardcode length here. Change once strings are dynamically allocated.
+		if (fgets(str, 255, fp)) {
+			printf("\n%s\n", str);
 		}
-
 	
 	} else {
 		fprintf(stderr, "File open returned null.\n");

@@ -16,6 +16,7 @@
 
 int main(int argc, char **argv) {
 
+	//Parse command line arguments and options using argp
 	parse_arguments(argc, argv);
 
 	bool shouldQuit = false;

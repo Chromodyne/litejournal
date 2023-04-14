@@ -9,9 +9,9 @@ static int parse_opt(int key, char *arg, struct argp_state *state) {
 
 		case 'l': {
 			
-			//TODO: Implement this once reading function is implemented in journal.c
-			printf("Will list entries of specified number.\n");
-			printf("%s", arg);
+			//TODO: Fix this once multiple lines can be read.
+			list_latest();
+            exit(EXIT_SUCCESS);
 			break;
 
 		}
