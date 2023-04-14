@@ -20,27 +20,25 @@ static int parse_opt(int key, char *arg, struct argp_state *state) {
 
 		case 'l': {
 			
+			//TODO: Implement this once reading function is implemented in journal.c
 			printf("Will list entries of specified number.\n");
-
+			printf("%s", arg);
 			break;
 
 		}
 
-
 		case 'n': {
-
 
 			//Check if the supplied argument exists, if so, use it to create an entry. Otherwise,
 			//invoke new_entry and give user a prompt to enter their new entry.
 			if (arg != NULL) {
-				//TODO: Doesn't work. Solve.
 				write_to_file(arg);
+				exit(EXIT_SUCCESS);
 				
 			} else {
 				new_entry();
 				exit(EXIT_SUCCESS);
 			}
-
 
 			break;
 
@@ -95,28 +93,21 @@ int main(int argc, char **argv) {
 			case 'n':
 				new_entry();
 				break;
-
 			case 'r':
 				break;
-
 			case 'l':
 				list_latest();
 				break;
-			
 			case 'o':
 				open_journal();
 				break;
-
 			case 'q':
 				shouldQuit = true;
 				break;
-
 			default:
 				printf("\nIncorrect selection specified. ");
 				break;
-
 		}
-
 	}
 
 	return 0;

@@ -7,6 +7,7 @@
 #define SUBJECT_LENGTH 100
 #define JOURNAL_FILE "journal.lj"
 #define MAX_LENGTH 255
+
 //This struct is used to store input temporarilty before it is written to the journal file.
 typedef struct {
 
@@ -24,9 +25,6 @@ void write_to_file();
 
 //Stores user input into the journal file when invoked.
 void new_entry() {
-
-	//printf("Please enter a subject: ");					//Currently unused.
-	//fgets(new_entry.subject, SUBJECT_LENGTH, stdin);
 
 	printf("Enter your text (Max 255 characters.): \n");
 
