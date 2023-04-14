@@ -1,7 +1,7 @@
 # litejournal
 
-This is a quick and dirty terminal-based journaling software written in C for Linux.
+A lightweight, terminal-based journaling application for Linux written in C.
 
-**Note:** Currently this software uses a barebones printing based UI. After getting past the proof-of-concept phase, I plan to rewrite it to use `ncurses`.
+**Note:** Currently this software uses a barebones `stdin` printing based UI. After getting past the proof-of-concept phase a rewrite for using `ncurses` is planned.
 
-This software is extremely early in development and honestly should not be used in its current form for anyone wanting something remotely feature complete, safe, or stable.
+**Disclaimer:** This software is extremely early in development and honestly should not be used in its current form for anyone wanting something remotely feature complete, safe, or stable.
