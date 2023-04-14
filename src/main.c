@@ -9,6 +9,7 @@
 */
 #include<stdio.h>
 #include<stdbool.h>
+#include<stdlib.h>
 #include<ctype.h>
 #include<argp.h>
 #include "../include/journal.h"
@@ -17,10 +18,38 @@ static int parse_opt(int key, char *arg, struct argp_state *state) {
 	
 	switch (key) {
 
-		//New entry.
+		case 'l': {
+			
+			printf("Will list entries of specified number.\n");
+
+			break;
+
+		}
+
+
 		case 'n': {
 
-			printf("Should write a new entry.\n");
+
+			//Check if the supplied argument exists, if so, use it to create an entry. Otherwise,
+			//invoke new_entry and give user a prompt to enter their new entry.
+			if (arg != NULL) {
+				//TODO: Doesn't work. Solve.
+				write_to_file(arg);
+				
+			} else {
+				new_entry();
+				exit(EXIT_SUCCESS);
+			}
+
+
+			break;
+
+		}
+
+		case 'o': {
+
+			open_journal();
+			exit(EXIT_SUCCESS);
 			break;
 
 		}
@@ -34,7 +63,9 @@ static int parse_opt(int key, char *arg, struct argp_state *state) {
 int main(int argc, char **argv) {
 
 	struct argp_option options[] = {
-		{0, 'n', 0, 0, "Create a new entry"},
+		{"list-entries", 'l', "NUMENTRIES", OPTION_ARG_OPTIONAL, "List specified number of entries"},
+		{"new-entry", 'n', "TEXT", OPTION_ARG_OPTIONAL, "Create a new entry"},			//TODO: Takes a string as an argument.
+		{"open-journal", 'o', 0, 0, "Open journal file in default editor"},
 		{0}
 	};
 
