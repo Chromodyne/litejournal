@@ -138,11 +138,11 @@ void remove_journal() {
 	if ((choice = getchar()) == 'y') {
 
 		system("rm journal.lj");
-		printf("Journal file removed successfully.");
+		printf("Journal file removed successfully.\n");
 
 	} else {
 
-		printf("Journal removal cancelled.");
+		printf("Journal removal cancelled.\n");
 		return;
 
 	} 
