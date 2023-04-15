@@ -1,2 +1,2 @@
 litejournal:
-	gcc -o ../bin/litejournal ../src/main.c ../src/journal.c ../src/userargs.c
+	gcc -o ../bin/litejournal ../src/main.c ../src/journal.c ../src/userargs.c ../src/statistics.c

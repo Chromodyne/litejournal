@@ -13,11 +13,13 @@
 #include<ctype.h>
 #include "../include/journal.h"
 #include "../include/userargs.h"
+#include "../include/statistics.h"
 
 int main(int argc, char **argv) {
 
 	//Parse command line arguments and options using argp before entering loop.
 	parse_arguments(argc, argv);
+	initialize_stats();
 
 	bool shouldQuit = false;
 
