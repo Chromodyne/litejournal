@@ -4,15 +4,12 @@
 #include<time.h>
 #include<unistd.h>
 
-#define SUBJECT_LENGTH 100
 #define JOURNAL_FILE "journal.lj"
 //Dynamically allocate this later so that the length of entries is not hardcoded.
 #define MAX_LENGTH 255
 
 //This struct is used to store input temporarilty before it is written to the journal file.
 typedef struct {
-
-	char subject[SUBJECT_LENGTH];
 
 	//TODO: The length of the body needs to be dynamically allocated at runtime.
 	char body[MAX_LENGTH];
@@ -98,6 +95,7 @@ void write_to_file(char * args) {
 		fgets(new_entry.body, sizeof(new_entry.body), stdin);
 	} else {
 		strcpy(new_entry.body, args);
+		strcat(new_entry.body, "\n");
 	}
 	
 	fp = fopen(JOURNAL_FILE, "a");
@@ -143,3 +141,25 @@ void remove_journal() {
 	} 
 
 }
+
+// char *handle_input() {
+
+// #define	BUFFER 200
+
+// 	char *user_input = NULL;
+// 	char input_buffer[BUFFER];
+
+// 	size_t input_length = 0; temp_length = 0;
+
+// 	do {
+// 		fgets(input_buffer, BUFFER, stdin);
+// 		temp_length = strlen(input_buffer);
+// 		user_input = realloc(user_input, input_length + temp_length + 1);
+// 		strcpy(user_input + input_length, input_buffer);
+// 		input_length += temp_length;
+
+// 	} while (temp_length == BUFFER - 1 && input_buffer[BUFFER - 2] != '\n');
+	
+// 	return user_input;
+
+// }
