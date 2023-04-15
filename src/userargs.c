@@ -66,7 +66,7 @@ void parse_arguments(int argc, char **argv) {
 
     struct argp_option options[] = {
 		{"list-entries", 'l', "NUMENTRIES", OPTION_ARG_OPTIONAL, "List specified number of entries"},
-		{"new-entry", 'n', "TEXT", OPTION_ARG_OPTIONAL, "Create a new entry"},			//TODO: Takes a string as an argument.
+		{"new-entry", 'n', "TEXT", OPTION_ARG_OPTIONAL, "Create a new entry"},
 		{"open-journal", 'o', 0, 0, "Open journal file in default editor"},
 		{"remove-journal", 'r', 0, 0, "Delete journal file"},
 		{0}
