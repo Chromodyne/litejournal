@@ -10,8 +10,14 @@ static int parse_opt(int key, char *arg, struct argp_state *state) {
 		case 'l': {
 			
 			//TODO: Fix this once multiple lines can be read.
-			list_latest();
-            exit(EXIT_SUCCESS);
+            if (arg != NULL) {
+                list_latest(atoi(arg));
+                exit(EXIT_SUCCESS);
+            } else {
+                list_latest(1);
+                exit(EXIT_SUCCESS);
+            }
+			
 			break;
 
 		}

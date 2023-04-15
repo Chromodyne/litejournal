@@ -44,7 +44,8 @@ int main(int argc, char **argv) {
 			case 'r':
 				break;
 			case 'l':
-				list_latest();
+				//TODO: Do not hardcode argument number.
+				list_latest(1);
 				break;
 			case 'o':
 				open_journal();

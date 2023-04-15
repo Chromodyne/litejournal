@@ -34,7 +34,7 @@ void new_entry() {
 }
 
 //This function will list the latest entry in the journal.
-void list_latest() {
+void list_latest(int num) {
 
 	FILE *fp;
 
