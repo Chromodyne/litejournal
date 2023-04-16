@@ -115,20 +115,12 @@ void write_to_file(char * args) {
 	
 	journal = open_file("a");
 
-	if (journal != NULL) {
-
-		fputs(get_time(new_entry), journal);
-		fputs("   ", journal);
-		fputs(new_entry.body, journal);
-		fprintf(journal, "\n");
+	//NOTE: Checking for null pointers takes place in fileio. Seeing if redundancy is needed here.
+	fputs(get_time(new_entry), journal);
+	fputs("   ", journal);
+	fputs(new_entry.body, journal);
+	fprintf(journal, "\n");
 			
-	} else {
-		
-		fprintf(stderr, "File open returned null.\n");
-		exit(EXIT_FAILURE);
-
-	}
-
 	printf("\nNew entry added successully!\n\n");
 
 	close_file(journal);
