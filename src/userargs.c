@@ -17,9 +17,9 @@ static int parse_opt(int key, char *arg, struct argp_state *state) {
                 list_latest(1);
                 exit(EXIT_SUCCESS);
             }
-			
-			break;
 
+			break;
+			
 		}
 
 		case 'n': {
@@ -40,19 +40,15 @@ static int parse_opt(int key, char *arg, struct argp_state *state) {
 		}
 
 		case 'o': {
-
 			open_journal();
 			exit(EXIT_SUCCESS);
 			break;
-
 		}
 
 		case 'r': {
-
 			remove_journal();
 			exit(EXIT_SUCCESS);
 			break;
-
 		}
 
 	}

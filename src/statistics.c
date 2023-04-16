@@ -2,36 +2,15 @@
 #include<stdbool.h>
 #include<stdint.h>
 #include<unistd.h>
+#include "../include/journal.h"
 
-//File will be used to handle statistics.
+//File will be used to handle statistics keeping for journal. Mostly for fun!
 
 struct Stats {
-
     uint32_t numEntries;
     uint32_t longestEntry;
     uint32_t streak;
-
 } stats;
-
-
-bool check_journal() {
-
-    bool firstRun = true;
-
-    //NOTE: POSIX standard but NOT C standard. Consider revising for portability.
-    if (access("../bin/journal.lj", F_OK)) {
-
-        firstRun = false;
-
-    } else {
-
-        firstRun = true;
-
-    }
-
-    return firstRun;
-
-}
 
 void initialize_stats() {
 

@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<stdbool.h>
 #include<string.h>
 #include<time.h>
 #include<unistd.h>
@@ -16,6 +17,18 @@ typedef struct {
 	time_t timestamp;
 
 } Entry;
+
+//TODO: Move this to journal.c. Makes more sense for general initialization to happen there.
+bool check_journal() {
+
+    //NOTE: access() is POSIX standard but NOT C standard. Consider revising for portability.
+    if (access("../bin/journal.lj", F_OK)) {
+        return false;
+    } else {
+        return true;
+    }
+
+}
 
 //Function prototypes
 char * get_time(Entry entry);
