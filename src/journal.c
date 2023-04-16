@@ -4,6 +4,7 @@
 #include<string.h>
 #include<time.h>
 #include<unistd.h>
+#include "../include/fileio.h"
 
 #define JOURNAL_FILE "journal.lj"
 //Dynamically allocate this later so that the length of entries is not hardcoded.
@@ -99,8 +100,9 @@ char *get_time(Entry entry) {
 void write_to_file(char * args) {
 
 	time_t timestamp = time(NULL);
-	FILE *fp;
 	Entry new_entry;
+
+	FILE *journal;
 
 	new_entry.timestamp = timestamp;
 
@@ -111,14 +113,14 @@ void write_to_file(char * args) {
 		strcat(new_entry.body, "\n");
 	}
 	
-	fp = fopen(JOURNAL_FILE, "a");
+	journal = open_file("a");
 
-	if (fp != NULL) {
+	if (journal != NULL) {
 
-		fputs(get_time(new_entry), fp);
-		fputs("   ", fp);
-		fputs(new_entry.body, fp);
-		fprintf(fp, "\n");
+		fputs(get_time(new_entry), journal);
+		fputs("   ", journal);
+		fputs(new_entry.body, journal);
+		fprintf(journal, "\n");
 			
 	} else {
 		
@@ -129,7 +131,7 @@ void write_to_file(char * args) {
 
 	printf("\nNew entry added successully!\n\n");
 
-	fclose(fp);
+	close_file(journal);
 
 }
 
