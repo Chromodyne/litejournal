@@ -130,21 +130,34 @@ void remove_journal() {
 
 	char choice;
 
-	printf("Are you certain you wish to delete your journal file? (This cannot be undone!) (y/n): ");
+	if (check_journal()) {
 
-	//TODO: Make sure the journal file exists first. If so, delete, otherwise, throw an error.
-	if ((choice = getchar()) == 'y') {
+		printf("Are you certain you wish to delete your journal file? (This cannot be undone!) (y/n): ");
 
-		system("rm journal.lj");
-		printf("Journal file removed successfully.\n");
+		switch (choice = getchar()) {
+
+			case 'y': {
+				system("rm journal.lj");
+				printf("Journal file removed successfully.\n");
+			}
+
+			case 'n': {
+				printf("Journal removal cancelled.\n");
+				return;
+			}
+
+			default: {
+				printf("Invalid choice. Terminating.\n");
+			}
+
+		}
 
 	} else {
 
-		printf("Journal removal cancelled.\n");
-		return;
-
-	} 
-
+		printf("No journal file exists. Terminating.\n");
+		
+	}
+	
 }
 
 // char *handle_input() {
