@@ -102,7 +102,7 @@ void write_to_file(char * args) {
 	time_t timestamp = time(NULL);
 	Entry new_entry;
 
-	FILE *journal;
+	FILE *journal = open_file("a");
 
 	new_entry.timestamp = timestamp;
 
@@ -113,8 +113,6 @@ void write_to_file(char * args) {
 		strcat(new_entry.body, "\n");
 	}
 	
-	journal = open_file("a");
-
 	//NOTE: Checking for null pointers takes place in fileio. Seeing if redundancy is needed here.
 	fputs(get_time(new_entry), journal);
 	fputs("   ", journal);
